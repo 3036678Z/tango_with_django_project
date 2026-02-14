@@ -43,7 +43,7 @@ def add_category(request):
             form.save(commit=True)
             return redirect('/rango/')
         else:
-            print(form.error)
+            print(form.errors)
     
     return render(request, 'rango/add_category.html', {'form': form})
 
@@ -67,7 +67,9 @@ def add_page(request, category_name_slug):
                 page.category = category
                 page.views = 0
                 page.save()
-                return redirect(reverse('rango:show_category',kwargs={'category_name_slug':category_name_slug}))
+                return redirect(reverse('rango:show_category',
+                                        kwargs={'category_name_slug':
+                                                category_name_slug}))
         else:
             print(form.errors)
     
